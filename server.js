@@ -1,5 +1,5 @@
 const express = require('express');
-const { chromium } = require('playwright'); // Use Playwright
+const { chromium } = require('playwright');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -11,6 +11,7 @@ app.get('/proxy', async (req, res) => {
     // Launch a headless browser
     const browser = await chromium.launch({
       headless: true,
+      executablePath: '/opt/render/.cache/ms-playwright/chromium-1155/chrome-linux/chrome', // Correct Chromium path
       args: ['--no-sandbox', '--disable-setuid-sandbox'], // Required for Render
     });
 
