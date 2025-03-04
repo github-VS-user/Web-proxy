@@ -2,7 +2,5 @@ services:
   - type: web
     name: my-proxy
     env: node
-    buildCommand: |
-      apt-get update && apt-get install -y chromium
-      npm install
+    buildCommand: npm install
     startCommand: npm start
