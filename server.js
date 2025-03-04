@@ -1,5 +1,5 @@
 const express = require('express');
-const puppeteer = require('puppeteer-core');
+const puppeteer = require('puppeteer'); // Use the full Puppeteer package
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -11,7 +11,6 @@ app.get('/proxy', async (req, res) => {
     // Launch a headless browser
     const browser = await puppeteer.launch({
       headless: true,
-      executablePath: '/usr/bin/chromium-browser', // Chromium path on Render
       args: ['--no-sandbox', '--disable-setuid-sandbox'], // Required for Render
     });
 
@@ -34,7 +33,7 @@ app.get('/proxy', async (req, res) => {
     res.send(content);
   } catch (error) {
     console.error('Error fetching the target website:', error);
-    res.status(500).send('Error fetching the target website');
+    res.status(500).send(`Error fetching the target website: ${error.message}`);
   }
 });
 
