@@ -1,13 +1,14 @@
 {
   "name": "my-proxy",
   "version": "1.0.0",
-  "description": "A simple proxy server with a Web Service",
+  "description": "A simple proxy server with Puppeteer",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "install": "node install-puppeteer.js"
   },
   "dependencies": {
     "express": "^4.18.2",
-    "puppeteer": "^21.0.0"
+    "puppeteer": "^21.11.0"
   }
 }
