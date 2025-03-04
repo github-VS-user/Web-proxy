@@ -4,12 +4,11 @@
   "description": "A simple proxy server with Puppeteer",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "install": "node install-puppeteer.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.18.2",
-    "puppeteer": "^21.11.0"
+    "puppeteer-core": "^21.11.0"
   },
   "license": "MIT"
 }
