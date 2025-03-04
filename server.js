@@ -1,5 +1,5 @@
 const express = require('express');
-const puppeteer = require('puppeteer'); // Use the full Puppeteer package
+const { chromium } = require('playwright'); // Use Playwright
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -9,7 +9,7 @@ app.get('/proxy', async (req, res) => {
 
   try {
     // Launch a headless browser
-    const browser = await puppeteer.launch({
+    const browser = await chromium.launch({
       headless: true,
       args: ['--no-sandbox', '--disable-setuid-sandbox'], // Required for Render
     });
@@ -21,7 +21,7 @@ app.get('/proxy', async (req, res) => {
     await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
 
     // Navigate to the target website
-    await page.goto(targetUrl, { waitUntil: 'networkidle2' });
+    await page.goto(targetUrl, { waitUntil: 'networkidle' });
 
     // Get the page content
     const content = await page.content();
