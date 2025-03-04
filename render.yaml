@@ -2,5 +2,7 @@ services:
   - type: web
     name: my-proxy
     env: node
-    buildCommand: npm install
+    buildCommand: |
+      npm install
+      npx playwright install
     startCommand: npm start
