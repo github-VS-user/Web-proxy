@@ -1,5 +1,5 @@
 const express = require('express');
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -11,6 +11,7 @@ app.get('/proxy', async (req, res) => {
     // Launch a headless browser
     const browser = await puppeteer.launch({
       headless: true,
+      executablePath: '/usr/bin/chromium-browser', // Chromium path on Render
       args: ['--no-sandbox', '--disable-setuid-sandbox'], // Required for Render
     });
 
