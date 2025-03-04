@@ -1,5 +1,6 @@
 const express = require('express');
 const { chromium } = require('playwright');
+const fs = require('fs'); // Add this to check if the file exists
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -8,10 +9,19 @@ app.get('/proxy', async (req, res) => {
   const targetUrl = 'https://makerworld.com/en/3d-models'; // Replace with the target website
 
   try {
+    // Log the Chromium path
+    const chromiumPath = '/opt/render/.cache/ms-playwright/chromium-1155/chrome-linux/chrome';
+    console.log('Chromium path:', chromiumPath);
+
+    // Check if the Chromium executable exists
+    if (!fs.existsSync(chromiumPath)) {
+      throw new Error(`Chromium executable not found at ${chromiumPath}`);
+    }
+
     // Launch a headless browser
     const browser = await chromium.launch({
       headless: true,
-      executablePath: '/opt/render/.cache/ms-playwright/chromium-1155/chrome-linux/chrome', // Correct Chromium path
+      executablePath: chromiumPath, // Correct Chromium path
       args: ['--no-sandbox', '--disable-setuid-sandbox'], // Required for Render
     });
 
